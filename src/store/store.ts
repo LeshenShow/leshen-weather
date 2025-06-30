@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { baseTodolistsApi } from "common/todolists/api/base-todolists-api"
-import { weatherApi } from "common/weather/api/weather-api"
+import { baseTodolistsApi } from "shared/api/base-todolist-api"
+import { weatherApi } from "features/weather/api/weather-api"
+import { useDispatch, useSelector } from "react-redux"
 
 export const store = configureStore({
   reducer: {
@@ -16,3 +17,5 @@ setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export const useAppSelector = useSelector.withTypes<RootState>()
