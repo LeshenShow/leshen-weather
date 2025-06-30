@@ -1,5 +1,5 @@
 import { Box, Card, Grid } from "@radix-ui/themes"
-import { useGetTodolistsQuery } from "../model/query-api"
+import { useGetTodolistsQuery } from "../model/todolist-api"
 import { TodolistItem } from "./todolistItem"
 
 export const Todolists = () => {

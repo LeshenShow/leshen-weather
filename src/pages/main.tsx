@@ -12,9 +12,9 @@ const MainPage = () => {
   return (
     <Box>
       <Header />
-      <Flex justify={"between"} className={"bg-fuchsia-800"} p={"2"}>
+      <Flex justify={"start"} className={"bg-fuchsia-800"} p={"2"}>
         <Todolists />
-        <Weather />
+        {/* <Weather /> */}
       </Flex>
     </Box>
   )

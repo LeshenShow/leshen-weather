@@ -36,7 +36,7 @@ const baseQueryWithAuthCheck: BaseQueryFn<string | FetchArgs, unknown, FetchBase
 
 export const baseTodolistsApi = createApi({
   reducerPath: "todolistsApi",
-  tagTypes: [TAGS.todolist, TAGS.auth],
+  tagTypes: [TAGS.todolist, TAGS.auth, TAGS.task],
   baseQuery: baseQueryWithAuthCheck,
   endpoints: () => ({}),
 })

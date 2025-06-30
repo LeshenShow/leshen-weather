@@ -6,4 +6,5 @@ export const LOCAL_STORAGE_AUTH_TOKEN = "auth-token"
 export const TAGS = {
   todolist: "todolist",
   auth: "auth",
+  task: "task",
 }
