@@ -1,4 +1,4 @@
-import { Button } from "@radix-ui/themes"
+import { Button, Card, Flex } from "@radix-ui/themes"
 import {
   useCreateTaskMutation,
   useDeleteTaskMutation,
@@ -32,10 +32,14 @@ export const TodolistItem = (props: Props) => {
     </ul>
   ))
   return (
-    <>
-      <Button onClick={createTaskHandler}>NEW</Button>
-      <div>{tasks}</div>
-    </>
+    <Flex key={todolistId}>
+      {/* <TodolistItem todolist={props.todolist} /> */}
+
+      <Card>
+        <Button onClick={createTaskHandler}>NEW</Button>
+        <div>{tasks}</div>
+      </Card>
+    </Flex>
   )
 }
 type Props = {

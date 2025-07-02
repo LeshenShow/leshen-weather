@@ -13,10 +13,10 @@ export const todolistsApi = baseTodolistsApi.injectEndpoints({
       providesTags: [TAGS.todolist],
     }),
     createTodolist: build.mutation<BaseTodolistResponse<{ item: Todolist }>, string>({
-      query: (body) => ({
+      query: (title) => ({
         url: createTodolistEndpoint(),
         method: "POST",
-        body,
+        body: { title },
       }),
       invalidatesTags: [TAGS.todolist],
     }),

@@ -13,17 +13,16 @@ export const tasksApi = baseTodolistsApi.injectEndpoints({
       }),
     }),
 
-    createTask: build.mutation<BaseTodolistResponse<{ item: DomainTask }>, CreateTaskRequest>({
+    createTask: build.mutation<BaseTodolistResponse, CreateTaskRequest>({
       invalidatesTags: (_result, _error, { todolistId }, _meta) => createTaskTag(todolistId),
       query: ({ todolistId, title }) => ({
         url: createTaskEndpoint(todolistId),
         method: "POST",
         body: { title },
-      }),
-      // проверить нужен ли айтем-типизация
+      }), // проверить нужен ли айтем-типизация BaseTodolistResponse<{ item: DomainTask }>
     }),
 
-    updateTask: build.mutation<BaseTodolistResponse<{ item: DomainTask }>, UpdateTaskRequest>({
+    updateTask: build.mutation<BaseTodolistResponse, UpdateTaskRequest>({
       invalidatesTags: (_result, _error, { todolistId }, _meta) => createTaskTag(todolistId),
       query: ({ todolistId, taskId, updateModel }) => ({
         url: createTaskEndpoint(todolistId, taskId),

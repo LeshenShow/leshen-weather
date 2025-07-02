@@ -1,13 +1,15 @@
-import { Box, Card, Grid } from "@radix-ui/themes"
-import { useGetTodolistsQuery } from "../model/todolist-api"
+import { Box, Card, Flex, Grid } from "@radix-ui/themes"
+import { useCreateTodolistMutation, useGetTodolistsQuery } from "../model/todolist-api"
 import { TodolistItem } from "./todolistItem"
+import { CreateNewItem } from "./create-new-item/create-new-item"
 
 export const Todolists = () => {
   const { data } = useGetTodolistsQuery(undefined, {
     // pollingInterval: 3000,
-    refetchOnFocus: true,
-    skipPollingIfUnfocused: true,
+    // refetchOnFocus: true,
+    // skipPollingIfUnfocused: true,
   })
+  const [createTodolist] = useCreateTodolistMutation()
   // if (isLoading) {
   //   return (
   //     <Box sx={containerSx} style={{ gap: "32px" }}>
@@ -19,13 +21,11 @@ export const Todolists = () => {
   //     </Box>
   //   )
   // }
-  const todolists = data?.map((todolist) => (
-    <Grid key={todolist.id}>
-      <Card>
-        <TodolistItem todolist={todolist} />
-      </Card>
-    </Grid>
-  ))
-
-  return <>{todolists}</>
+  const todolists = data?.map((todolist) => <TodolistItem todolist={todolist} key={todolist.id} />)
+  return (
+    <Flex direction={"column"}>
+      {/* <CreateNewItem onCreateItem={createTodolist} /> */}
+      <Box> {todolists}</Box>
+    </Flex>
+  )
 }
