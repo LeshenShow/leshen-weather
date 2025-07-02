@@ -6,8 +6,8 @@ import { CreateNewItem } from "./create-new-item/create-new-item"
 export const Todolists = () => {
   const { data } = useGetTodolistsQuery(undefined, {
     // pollingInterval: 3000,
-    // refetchOnFocus: true,
-    // skipPollingIfUnfocused: true,
+    refetchOnFocus: true,
+    skipPollingIfUnfocused: true,
   })
   const [createTodolist] = useCreateTodolistMutation()
   // if (isLoading) {
@@ -24,7 +24,7 @@ export const Todolists = () => {
   const todolists = data?.map((todolist) => <TodolistItem todolist={todolist} key={todolist.id} />)
   return (
     <Flex direction={"column"}>
-      {/* <CreateNewItem onCreateItem={createTodolist} /> */}
+      <CreateNewItem onCreateItem={createTodolist} />
       <Box> {todolists}</Box>
     </Flex>
   )

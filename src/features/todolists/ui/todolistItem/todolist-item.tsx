@@ -7,6 +7,7 @@ import {
 } from "features/todolists/model/tasks-api"
 import type { DomainTodolist } from "features/todolists/model/types"
 import { useState } from "react"
+import { TodolistTitle } from "./todolist-title/todolist-title"
 
 export const TodolistItem = (props: Props) => {
   const { id: todolistId, filter } = props.todolist
@@ -32,9 +33,8 @@ export const TodolistItem = (props: Props) => {
     </ul>
   ))
   return (
-    <Flex key={todolistId}>
-      {/* <TodolistItem todolist={props.todolist} /> */}
-
+    <Flex key={todolistId} gap={"1"} mb={"1"} direction={"column"} className="bg-amber-600">
+      <TodolistTitle todolist={props.todolist} />
       <Card>
         <Button onClick={createTaskHandler}>NEW</Button>
         <div>{tasks}</div>
