@@ -1,12 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query/react"
-import {
-  TODOLIST_URL,
-  TODOLIST_API_KEY,
-  TODOLIST_AUTH_TOKEN,
-  TODOLIST_LOCAL_STORAGE_AUTH_TOKEN,
-  TODOLIST_TAGS,
-} from "shared/constants"
+
 import { getTodolistAuthToken } from "shared/utils"
 
 const baseQuery = fetchBaseQuery({
@@ -32,7 +26,7 @@ const baseQueryWithAuthCheck: BaseQueryFn<string | FetchArgs, unknown, FetchBase
   const result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    localStorage.removeItem(TODOLIST_LOCAL_STORAGE_AUTH_TOKEN)
+    localStorage.removeItem(LOCAL_STORAGE_AUTH_TOKEN)
     if (typeof window !== "undefined") {
       window.location.href = "/login"
     }
@@ -42,7 +36,7 @@ const baseQueryWithAuthCheck: BaseQueryFn<string | FetchArgs, unknown, FetchBase
 
 export const baseTodolistsApi = createApi({
   reducerPath: "todolistsApi",
-  tagTypes: [TODOLIST_TAGS.todolist, TODOLIST_TAGS.auth, TODOLIST_TAGS.task],
+  tagTypes: [TAGS.todolist, TAGS.auth, TAGS.task],
   baseQuery: baseQueryWithAuthCheck,
   endpoints: () => ({}),
 })

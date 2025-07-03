@@ -10,11 +10,11 @@ const MainPage = () => {
   if (loading) return null
 
   return (
-    <Box>
+    <Box className="min-h-screen bg-[var(--accent-1)]">
       <Header />
-      <Flex justify={"start"} className={"bg-fuchsia-800"} p={"2"}>
+      <Flex justify={"start"} p={"2"} className="">
         <Todolists />
-        {/* <Weather /> */}
+        <Weather />
       </Flex>
     </Box>
   )

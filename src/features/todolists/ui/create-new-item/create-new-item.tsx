@@ -1,6 +1,7 @@
 import { PlusIcon } from "@radix-ui/react-icons"
 import { Box, Button, Flex, IconButton, Text, TextField } from "@radix-ui/themes"
 import { useState, type ChangeEvent, type ChangeEventHandler, type KeyboardEvent } from "react"
+import { CustomIconButton } from "shared/ui/custom-icon-button"
 
 export const CreateNewItem = (props: Props) => {
   const [title, setTitle] = useState("")
@@ -32,11 +33,9 @@ export const CreateNewItem = (props: Props) => {
           style={{ borderColor: error ? "red" : undefined }}
           disabled={props.disabled}
         />
-        <IconButton onClick={createItemHandler} disabled={props.disabled}>
-          <PlusIcon />
-        </IconButton>
+        <CustomIconButton onClick={createItemHandler} icon={<PlusIcon />} disabled={props.disabled} />
       </Flex>
-      <Box mt={"1"} height={"20px"} style={{ visibility: error ? "visible" : "hidden" }}>
+      <Box mt={"1"} height={"10px"} style={{ visibility: error ? "visible" : "hidden" }}>
         <Text color="red" size={"2"}>
           {error || "error place"}
         </Text>

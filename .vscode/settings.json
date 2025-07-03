@@ -2,5 +2,16 @@
   "material-icon-theme.activeIconPack": "react_redux",
   "material-icon-theme.folders.theme": "specific",
   "material-icon-theme.hidesExplorerArrows": false,
-  "material-icon-theme.files.customClones": []
+  "material-icon-theme.files.customClones": [],
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSameLine": false,
+  "prettier.semi": false
+  // "tailwindCSS.experimental.classRegex": ["classnames\\(([^)]*)\\)", "cn\\(([^)]*)\\)"],
+  // "tailwindCSS.experimental.configFile": null,
+  // "tailwindCSS.includeLanguages": {
+  //   "typescriptreact": "javascript"
+  // },
+  // "editor.quickSuggestions": {
+  //   "strings": true
+  // }
 }

@@ -1,47 +1,18 @@
-import { Button, Card, Flex } from "@radix-ui/themes"
-import {
-  useCreateTaskMutation,
-  useDeleteTaskMutation,
-  useGetTasksQuery,
-  useUpdateTaskMutation,
-} from "features/todolists/model/tasks-api"
-import type { DomainTodolist } from "features/todolists/model/types"
-import { useState } from "react"
-import { TodolistTitle } from "./todolist-title/todolist-title"
+import { Flex } from "@radix-ui/themes";
+import type { DomainTodolist } from "features/todolists/model/types";
+import { TodolistTitle } from "./todolist-title/todolist-title";
+import { Tasks } from "./tasks/tasks";
 
 export const TodolistItem = (props: Props) => {
-  const { id: todolistId, filter } = props.todolist
-  const [page, setPage] = useState(1)
-  const [count, setCount] = useState(5)
-  const { data } = useGetTasksQuery({ todolistId, params: { page, count } })
-  const [createTask] = useCreateTaskMutation()
-  const [deleteTask] = useDeleteTaskMutation()
-  const [updateTask] = useUpdateTaskMutation()
-  const createTaskHandler = () => createTask({ todolistId, title: "qwe" })
-  const deleteTaskHandler = (taskId: string) => deleteTask({ todolistId, taskId })
-  // const updateTaskHandler = (taskId: string) =>updateTask( {todolistId, taskId, updateModel})
-  const tasks = data?.items.map((t) => (
-    <ul key={t.id}>
-      <div>{t.title}</div>
-      <Button
-        onClick={() => {
-          deleteTaskHandler(t.id)
-        }}
-      >
-        X
-      </Button>
-    </ul>
-  ))
+  const { id: todolistId, filter } = props.todolist;
+
   return (
-    <Flex key={todolistId} gap={"1"} mb={"1"} direction={"column"} className="bg-amber-600">
+    <Flex key={todolistId} mb={"1"} p={"1"} direction={"column"} className="rounded-lg">
       <TodolistTitle todolist={props.todolist} />
-      <Card>
-        <Button onClick={createTaskHandler}>NEW</Button>
-        <div>{tasks}</div>
-      </Card>
+      <Tasks todolistId={todolistId} />
     </Flex>
-  )
-}
+  );
+};
 type Props = {
-  todolist: DomainTodolist
-}
+  todolist: DomainTodolist;
+};

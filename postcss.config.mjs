@@ -9,3 +9,10 @@ export default config;
 //     autoprefixer: {},
 //   },
 // }
+
+// export default {
+//   plugins: {
+//     "@tailwindcss/postcss": {},
+//     autoprefixer: {},
+//   },
+// };

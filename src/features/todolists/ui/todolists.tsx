@@ -25,7 +25,7 @@ export const Todolists = () => {
   return (
     <Flex direction={"column"}>
       <CreateNewItem onCreateItem={createTodolist} />
-      <Box> {todolists}</Box>
+      <Box>{todolists}</Box>
     </Flex>
   )
 }

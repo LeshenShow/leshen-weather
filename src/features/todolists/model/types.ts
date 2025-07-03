@@ -1,5 +1,10 @@
 import type { TaskPriority, TaskStatus } from "shared/enums"
-
+export type TodolistLoginArgs = {
+  email: string
+  password: string
+  rememberMe?: boolean
+  captcha?: string
+}
 export type Todolist = {
   id: string
   title: string
