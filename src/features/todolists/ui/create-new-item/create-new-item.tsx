@@ -1,11 +1,12 @@
 import { PlusIcon } from "@radix-ui/react-icons"
-import { Box, Button, Flex, IconButton, Text, TextField } from "@radix-ui/themes"
-import { useState, type ChangeEvent, type ChangeEventHandler, type KeyboardEvent } from "react"
-import { CustomIconButton } from "shared/ui/custom-icon-button"
+import { Badge, Flex, IconButton, TextField } from "@radix-ui/themes"
+import { useState, type ChangeEvent, type KeyboardEvent } from "react"
+import { useErrorReset } from "./hooks"
 
 export const CreateNewItem = (props: Props) => {
   const [title, setTitle] = useState("")
   const [error, setError] = useState<string | null>(null)
+  useErrorReset(error, () => setError(null))
 
   const createItemHandler = () => {
     const checkTitle = title.trim()
@@ -22,24 +23,26 @@ export const CreateNewItem = (props: Props) => {
     event.key === "Enter" && createItemHandler()
 
   return (
-    <Flex direction={"column"} m={"1"}>
-      <Flex>
-        <TextField.Root
-          onChange={changeHandler}
-          onKeyDown={changeItemOnEnterHandler}
-          value={title}
-          placeholder="Введите название"
-          aria-invalid={!!error}
-          style={{ borderColor: error ? "red" : undefined }}
+    <Flex direction={"row"} m={"1"} mb={"2"} align={"center"} gap={"1"}>
+      <TextField.Root
+        onChange={changeHandler}
+        onKeyDown={changeItemOnEnterHandler}
+        value={title}
+        placeholder={"Введите название"}
+        aria-invalid={!!error}
+        disabled={props.disabled}
+      />
+      {error ? (
+        <Badge size={"3"} children={"Поле не должно быть пустым"} color="red"></Badge>
+      ) : (
+        <IconButton
+          onClick={createItemHandler}
+          children={<PlusIcon />}
           disabled={props.disabled}
+          size={"2"}
+          variant="outline"
         />
-        <CustomIconButton onClick={createItemHandler} icon={<PlusIcon />} disabled={props.disabled} />
-      </Flex>
-      <Box mt={"1"} height={"10px"} style={{ visibility: error ? "visible" : "hidden" }}>
-        <Text color="red" size={"2"}>
-          {error || "error place"}
-        </Text>
-      </Box>
+      )}
     </Flex>
   )
 }

@@ -7,11 +7,11 @@ export const TodolistItem = (props: Props) => {
   const { id: todolistId, filter } = props.todolist;
 
   return (
-    <Flex key={todolistId} mb={"1"} p={"1"} direction={"column"} className="rounded-lg">
+    <Flex key={todolistId} mb={"1"} p={"1"} direction={"column"} className="rounded-lg bg-[var(--accent-4)]">
       <TodolistTitle todolist={props.todolist} />
       <Tasks todolistId={todolistId} />
     </Flex>
-  );
+  )
 };
 type Props = {
   todolist: DomainTodolist;

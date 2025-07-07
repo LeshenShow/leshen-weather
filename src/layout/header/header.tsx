@@ -4,7 +4,7 @@ import { useLogoutMutation } from "features/todolists/model/auth-api"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/router"
 import { baseTodolistsApi } from "shared/api"
-import { LOCAL_STORAGE_AUTH_TOKEN, TAGS } from "shared/constants"
+import { TODOLIST_LOCAL_STORAGE_AUTH_TOKEN, TODOLIST_TAGS } from "shared/constants"
 import { ResultCode } from "shared/enums"
 import { useAppDispatch } from "store/store"
 
@@ -19,11 +19,11 @@ export function Header() {
     logout()
       .then(res => {
         if (res.data?.resultCode === ResultCode.Success) {
-          localStorage.removeItem(LOCAL_STORAGE_AUTH_TOKEN)
+          localStorage.removeItem(TODOLIST_LOCAL_STORAGE_AUTH_TOKEN)
         }
       })
       .then(() => {
-        dispatch(baseTodolistsApi.util.invalidateTags([TAGS.auth]))
+        dispatch(baseTodolistsApi.util.invalidateTags([TODOLIST_TAGS.auth]))
       })
     loginRouter()
   }
@@ -33,10 +33,10 @@ export function Header() {
       top={"0"}
       height={"50px"}
       gap={"2"}
-      mx={"2"}
+      px={"2"}
       align={"center"}
       justify={"center"}
-      className="bg-[var(--accent-2)]"
+      className="bg-[var(--accent-1)]"
     >
       <Badge size={"3"} variant="solid" children={":)__HEADER__(:"} />
       <IconButton onClick={toggleThemeHandler} children={theme === "dark" ? <MoonIcon /> : <SunIcon />} />

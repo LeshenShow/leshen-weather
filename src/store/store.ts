@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import { baseTodolistsApi } from "shared/api/base-todolist-api"
 import { useDispatch, useSelector } from "react-redux"
+import { baseWeatherApi } from "shared/api"
 
 export const store = configureStore({
   reducer: {

@@ -7,7 +7,7 @@ import {
   TODOLIST_LOCAL_STORAGE_AUTH_TOKEN,
   TODOLIST_TAGS,
 } from "shared/constants"
-import { getTodolistAuthToken } from "shared/utils"
+import { getAuthToken } from "shared/utils"
 
 const baseQuery = fetchBaseQuery({
   baseUrl: TODOLIST_URL,
@@ -16,7 +16,7 @@ const baseQuery = fetchBaseQuery({
       throw new Error("Missing environment variables: TODOLIST_API_KEY or TOKEN")
     }
     headers.set("API-KEY", TODOLIST_API_KEY)
-    const token = getTodolistAuthToken()
+    const token = getAuthToken(TODOLIST_LOCAL_STORAGE_AUTH_TOKEN)
     if (token) {
       headers.set("Authorization", `Bearer ${token}`)
     }

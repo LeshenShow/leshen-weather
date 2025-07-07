@@ -3,16 +3,16 @@ import { type TodolistLoginArgs } from "features/todolists/model"
 import { useRouter } from "next/router"
 import { Controller, useForm, type SubmitHandler } from "react-hook-form"
 import { useLoginMutation } from "features/todolists/model/auth-api"
-import { LOCAL_STORAGE_AUTH_TOKEN } from "shared/constants/todolist-const"
+import { TODOLIST_LOCAL_STORAGE_AUTH_TOKEN } from "shared/constants/todolist-const"
 import { ResultCode } from "shared/enums/todolist-enums"
 import { useEffect, useState } from "react"
-import { getTodolistAuthToken } from "shared/utils/auth"
+import { getAuthToken } from "shared/utils/get-auth-token"
 const Login = (props: Props) => {
   const router = useRouter()
   const [login] = useLoginMutation()
   const [checking, setChecking] = useState(true)
   useEffect(() => {
-    const token = getTodolistAuthToken()
+    const token = getAuthToken(TODOLIST_LOCAL_STORAGE_AUTH_TOKEN)
     token ? router.replace("/main") : setChecking(false)
   }, [])
 
@@ -25,11 +25,11 @@ const Login = (props: Props) => {
   } = useForm<TodolistLoginArgs>({
     defaultValues: { email: "", password: "", rememberMe: false },
   })
-  const onSubmit: SubmitHandler<TodolistLoginArgs> = (data) => {
-    login(data).then((res) => {
+  const onSubmit: SubmitHandler<TodolistLoginArgs> = data => {
+    login(data).then(res => {
       console.log("data", res)
       if (res.data?.resultCode === ResultCode.Success) {
-        localStorage.setItem(LOCAL_STORAGE_AUTH_TOKEN, res.data.data.token)
+        localStorage.setItem(TODOLIST_LOCAL_STORAGE_AUTH_TOKEN, res.data.data.token)
         router.replace("/main")
         reset()
       }

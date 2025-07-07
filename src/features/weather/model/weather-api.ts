@@ -1,9 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { baseWeatherApi } from "shared/api"
+import { WEATHER_API_KEY, WEATHER_TAGS } from "shared/constants"
+import type { WeatherResponse } from "./types"
 
-export const weatherApi = createApi({
-  reducerPath: "weatherApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_WEATHER_URL }),
-  endpoints: (builder) => ({
-    // getWeather: builder.query(),
+export const weatherCurrentApi = baseWeatherApi.injectEndpoints({
+  endpoints: build => ({
+    getCurrentWeather: build.query<WeatherResponse, { city: string }>({
+      providesTags: [WEATHER_TAGS.current],
+      query: ({ city }) => ({ url: `/current.json?key=${WEATHER_API_KEY}&q=${encodeURIComponent(city)}` }),
+    }),
   }),
 })
+export const { useGetCurrentWeatherQuery, useLazyGetCurrentWeatherQuery } = weatherCurrentApi

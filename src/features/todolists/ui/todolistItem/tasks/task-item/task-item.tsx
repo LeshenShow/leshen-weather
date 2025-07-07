@@ -27,10 +27,9 @@ export const TaskItem = (props: Props) => {
       <Flex justify={"between"} className={`${isTaskCompleted && "opacity-50"}`}>
         <Flex align={"center"} gap={"2"}>
           <Checkbox
+            size={"3"}
             checked={isTaskCompleted}
-            onCheckedChange={(checked) => {
-              updateStatusTaskHandler(checked)
-            }}
+            onCheckedChange={checked => updateStatusTaskHandler(checked)}
           />
           <EditableArea onChange={updateTitleTaskHandler} value={task.title} />
         </Flex>

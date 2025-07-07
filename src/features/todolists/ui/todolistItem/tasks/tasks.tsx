@@ -15,7 +15,7 @@ export const Tasks = (props: Props) => {
   const tasks = data?.items.map((t) => <TaskItem task={t} todolistId={todolistId} key={t.id} />)
 
   return (
-    <Flex direction={"column"}>
+    <Flex direction={"column"} gap={"1"}>
       <CreateNewItem onCreateItem={createTaskHandler} />
       <>{tasks}</>
     </Flex>
